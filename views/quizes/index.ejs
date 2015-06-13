@@ -24,8 +24,9 @@
 			var searchValues = [];
 			searchValues = window.location.search.split('=')[1].split('+');
 			for (var n = 0; n < searchValues.length; n++) {
+			var reSearchValues = new RegExp(searchValues[n],'ig');
 			document.getElementById("questionsTable").innerHTML =
-				document.getElementById("questionsTable").innerHTML.replace(searchValues[n], '<mark>' + searchValues[n] + '</mark>', 'ig');
+				document.getElementById("questionsTable").innerHTML.replace(reSearchValues, '<mark>' + searchValues[n] + '</mark>'/*, 'ig'*/);
 			}
 		}
 	}
