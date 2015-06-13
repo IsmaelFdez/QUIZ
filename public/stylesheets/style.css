@@ -29,3 +29,9 @@ footer {
 nav span {
 	margin: 0px 10px 0px 0px;
 }
+.searchBox {
+	width: auto;
+	height: auto;
+	left: 100%;
+	top: 0;
+}

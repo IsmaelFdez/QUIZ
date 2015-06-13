@@ -14,11 +14,21 @@ exports.load = function(req, res, next, quizId) {
 
 // GET /quizes
 exports.index = function(req, res) {
-	models.Quiz.findAll().then(
-		function(quizes) {
-			res.render('quizes/index.ejs', {quizes: quizes});
-		}
-	).catch(function(error) { next(error);});
+	if (req.query.search) {
+		models.Quiz.findAll({where: ["pregunta like ?", '%' +
+									req.query.search.replace(/\s/g, '%') +
+									'%']}).then(
+			function(quizes) {	
+				res.render('quizes/index.ejs', {quizes: quizes});
+			}
+		).catch(function(error) { next(error);});
+	} else {
+		models.Quiz.findAll().then(
+			function(quizes) {	
+				res.render('quizes/index.ejs', {quizes: quizes});
+			}
+		).catch(function(error) { next(error);});
+	}
 };
 
 // GET /quizes/:id
@@ -28,7 +38,13 @@ exports.show = function(req, res) {
 
 // Get /quizes/:id/answer
 exports.answer = function(req, res) {
-	var re = new RegExp(quiz[0].respuesta, 'i');
+	var re = new RegExp('\^' +
+							req.quiz.respuesta
+								.replace(/á/ig,'[a,á]')
+								.replace(/é/ig,'[e,é]')
+								.replace(/í/ig,'[i,í]')
+								.replace(/ó/ig,'[o,ó]')
+								.replace(/ú/ig,'[u,ú]') + '\$', 'i');
 	var resultado = 'Incorrecto';
 	if (req.query.respuesta.match(re)) {
 		resultado = 'Correcto';

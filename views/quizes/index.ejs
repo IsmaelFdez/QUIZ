@@ -1,5 +1,13 @@
-<table>
-	<% var i; for (i = 0; i < quizes.length; i++) { %>
+<section class="searchBox">
+	<form id="searchBox" method='get' action="/quizes?search">
+	  <p>Buscar:</p>
+	  <input type="text" name="search" required/>
+	  <input type="submit" value="Enviar"/>
+	</form>
+</section>
+
+<table id="questionsTable">	
+	<% var i; for (i = 0; i < quizes.length; i++) {%>
 		<tr>
 			<td>
 				<a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a>
@@ -7,3 +15,19 @@
 		</tr>
 	<% } %>
 </table>
+<p id="test"></p>
+
+<!-- Resaltado del texto buscado -->
+<script type="text/javascript"> 
+	function markSearch() {
+		if (window.location.search) {
+			var searchValues = [];
+			searchValues = window.location.search.split('=')[1].split('+');
+			for (var n = 0; n < searchValues.length; n++) {
+			document.getElementById("questionsTable").innerHTML =
+				document.getElementById("questionsTable").innerHTML.replace(searchValues[n], '<mark>' + searchValues[n] + '</mark>', 'ig');
+			}
+		}
+	}
+	markSearch();
+</script>
