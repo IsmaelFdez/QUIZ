@@ -3,7 +3,7 @@
 
   <head>
   	<meta charset="utf-8">
-    <title>Quiz</title>
+    <title>SCI-Quiz</title>
     <link   type="image/x-icon" rel="icon" href="/favicon.ico" />
     <link   rel='stylesheet' type='text/css'
             href='/stylesheets/style.css' />
@@ -17,9 +17,11 @@
 
   <body>
     <div id="page-wrap">
+      
       <header class="main" id="h1">
-        <h2>Quiz: <span>el juego de las preguntas</span></h2>
+        <h2>SCI-Quiz</h2>
       </header>
+      
       <nav class="main" id="n1" role="navigation">
         <ul>
           <li>
@@ -33,9 +35,19 @@
           </li>
         </ul>
       </nav>
+
       <section class="main" id="s1">
+        <% if (errors.length) { %>
+          <span id="ErrorMsgs">
+            corregir errores:<br>
+            <% for (var e in errors) { %>
+              <span> <%= errors[e].message %> </span><br>
+            <% } %>
+          </span>
+        <% } %>
         <div><%- body %></div>
       </section>
+
       <footer class="main" id="f1">
         <a href="http://es.wikipedia.org/wiki/Quiz">¿Qué es un <em>Quiz</em>?</a>
         <a href="https://github.com/IsmaelFdez/QUIZ">Ver proyecto en Github</a>

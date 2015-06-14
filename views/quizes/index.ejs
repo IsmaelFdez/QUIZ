@@ -9,24 +9,39 @@
 <table id="questionsTable">	
 	<% var i; for (i = 0; i < quizes.length; i++) {%>
 		<tr>
-			<td>
-				<a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a>
+			<td class="question">
+				<a href="quizes/<%= quizes[i].id %>">
+					<%= quizes[i].pregunta %>
+				</a>
+			</td>
+			<td class="editButton">
+				<a href="quizes/<%= quizes[i].id %>/edit">
+					<button>Editar</button>
+				</a>
+			</td>
+			<td class="delButton">
+				<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
+					<button type="submit" onClick='return confirm("Está seguro que desea borrar:\r\n\n<%= quizes[i].pregunta %>")'>Borrar</button>
+				</form>
 			</td>
 		</tr>
 	<% } %>
 </table>
-<p id="test"></p>
+<a href="/quizes/new"><button type="button">Crear pregunta</button></a>
 
 <!-- Resaltado del texto buscado -->
 <script type="text/javascript"> 
 	function markSearch() {
 		if (window.location.search) {
-			var searchValues = [];
+			var searchValues = [], nquestions = [];
 			searchValues = window.location.search.split('=')[1].split('+');
-			for (var n = 0; n < searchValues.length; n++) {
-			var reSearchValues = new RegExp(searchValues[n],'ig');
-			document.getElementById("questionsTable").innerHTML =
-				document.getElementById("questionsTable").innerHTML.replace(reSearchValues, '<mark>' + searchValues[n] + '</mark>'/*, 'ig'*/);
+			nquestions = document.getElementsByClassName("question");
+			for (var n = 0, nsearch = searchValues.length; n < nsearch; n++) {
+				var reSearchValues = new RegExp(searchValues[n],'ig');
+				for (var s = 0, nmatches = nquestions.length; s < nmatches; s++) {
+					nquestions[s].innerHTML =
+						nquestions[s].innerHTML.replace(reSearchValues, '<mark>' + searchValues[n] + '</mark>');
+				}
 			}
 		}
 	}
