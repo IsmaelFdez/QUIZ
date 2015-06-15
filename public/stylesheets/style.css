@@ -30,6 +30,9 @@ section > div {
 input {
 	padding: 6px;
 }
+button{
+	padding: 6px 2px;
+}
 #preg, #resp, .cancelbutton, select {
 	padding: 6px;
 	margin:10px;
@@ -134,4 +137,24 @@ nav span {
 #leyenda span {
 	display: block;
 	margin: 5% 0 10% 0;
+}
+#comentarios {
+	height: auto;
+	width: auto;
+	position: absolute;
+	top: 30%;
+	left: 2.5%;
+	text-align: left;
+}
+#comentarios a {
+	position:absolute;
+	left: -1px;
+}
+#comentarios p {
+	position: relative;
+	left: 10px;
+	padding-bottom: 7px;
+}
+h2, h3 {
+	padding-bottom: 10px;
 }

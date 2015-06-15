@@ -4,6 +4,18 @@
   <input type="text" name="respuesta"/>
   <input type="submit" value="Enviar"/>
 </form>
+
+<section id="comentarios">
+	<h3>Comentarios:</h3>
+	<% for (index in quiz.Comments) { %>
+		<p>- <%= quiz.Comments[index].texto %></p>
+	<% } %>
+	<a href="/quizes/<%= quiz.id %>/comments/new">
+		<button>Nuevo comentario</button>
+	</a>
+</section>
+
+
 <section id="gramad">
 	<p>A la hora de evaluar las respuestas no se tiene en cuenta la ausencia de mayúsculas ni de tildes.<br>
 	Aun así, recuerda que no es lo mismo <em>Adán</em> que <em>adán</em> o <em>gárrulo</em> que <em>garrulo</em>. Por eso, desde SCI-Quiz, os animamos a que escribáis las respuestas de manera correcta.</p>
