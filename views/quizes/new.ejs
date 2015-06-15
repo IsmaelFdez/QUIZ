@@ -1,13 +1,16 @@
-<p>Añadir pregunta:</p>
+<h3>Añade una pregunta:</h3>
 <form method="post" action="/quizes/create">
 	<% include _form.ejs %>
 </form>
 
 <script>
 	function emptyInput() {
-		document.getElementById("preg").value = "";
-		document.getElementById("resp").value = "";
-	}
+		if (!document.getElementById("ErrorMsgs")) {
+			document.getElementById("preg").value = "";
+			document.getElementById("resp").value = "";
+			document.getElementById("tema").value = "";
+		}
+	}	
 
 	emptyInput();
 </script>

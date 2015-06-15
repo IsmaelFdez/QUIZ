@@ -1,14 +1,14 @@
 <section class="searchBox">
 	<form id="searchBox" method='get' action="/quizes?search">
-	  <p>Buscar:</p>
-	  <input type="text" name="search" required/>
+	  <input type="text" name="search" placeholder="Buscador" required/>
 	  <input type="submit" value="Enviar"/>
 	</form>
 </section>
-
+<h2>Listado de preguntas</h2>
 <table id="questionsTable">	
 	<% var i; for (i = 0; i < quizes.length; i++) {%>
 		<tr>
+			<td><div class="id<%= quizes[i].tema %>"></div></td>
 			<td class="question">
 				<a href="quizes/<%= quizes[i].id %>">
 					<%= quizes[i].pregunta %>
@@ -26,8 +26,37 @@
 			</td>
 		</tr>
 	<% } %>
+	<tr>
+		<td>
+			<a href="/quizes/new"><button id="newButton" type="button">Crear pregunta</button></a>
+		</td>
+	</tr>
 </table>
-<a href="/quizes/new"><button type="button">Crear pregunta</button></a>
+
+<section id="leyenda">
+	<ul>
+		<li>
+			<div class="idast"></div>
+			<span>Astronomía</span>
+		</li>
+		<li>
+			<div class="idbio"></div>
+			<span>Biología</span>
+		</li>
+		<li>
+			<div class="idgeo"></div>
+			<span>Geología</span>
+		</li>
+		<li>
+			<div class="idquim"></div>
+			<span>Química</span>
+		</li>
+		<li>
+			<div class="idotros"></div>
+			<span>Otros</span>
+		</li>
+	</ul>
+</section>
 
 <!-- Resaltado del texto buscado -->
 <script type="text/javascript"> 

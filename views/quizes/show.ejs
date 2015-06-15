@@ -1,5 +1,18 @@
-<form method='get' action="/quizes/<%= quiz.id %>/answer">
-  <p>Pregunta: <%= quiz.pregunta %></p>
+<form id="quest"method='get' action="/quizes/<%= quiz.id %>/answer">
+  <h2>Pregunta de <%= quiz.tema.replace('ast','Astronomía:').replace('bio','Biología:').replace('geo','Geografía:').replace('quim','Química:').replace('otros','otros temas:') %></h2>
+  <p><%= quiz.pregunta %></p>
   <input type="text" name="respuesta"/>
   <input type="submit" value="Enviar"/>
 </form>
+<section id="gramad">
+	<p>A la hora de evaluar las respuestas no se tiene en cuenta la ausencia de mayúsculas ni de tildes.<br>
+	Aun así, recuerda que no es lo mismo <em>Adán</em> que <em>adán</em> o <em>gárrulo</em> que <em>garrulo</em>. Por eso, desde SCI-Quiz, os animamos a que escribáis las respuestas de manera correcta.</p>
+	<ul>
+		<li>
+			<a href="https://es.wikipedia.org/wiki/Acentuaci%C3%B3n_del_idioma_espa%C3%B1ol">Reglas de acentuación</a>
+		</li>
+		<li>
+			<a href="http://www.rae.es/">Real Academia Española (RAE)</a>
+		</li>
+	</ul>
+</section>

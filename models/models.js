@@ -35,15 +35,42 @@ exports.Quiz = Quiz; // esportar definición de tabla Quiz
 sequelize.sync().then(function() {
 	Quiz.count().then(function (count) {
 		if(count === 0) {
-			Quiz.create({	pregunta: 'Capital de Italia',
-							respuesta: 'Roma'
+			Quiz.create({	pregunta: '¿Cuál es la capital de Italia?',
+							respuesta: 'Roma',
+							tema: 'geo'
 						});
 
-			Quiz.create({	pregunta: 'Capital de Portugal',
-							respuesta: 'Lisboa'
+			Quiz.create({	pregunta: '¿Cuál es la capital de Portugal?',
+							respuesta: 'Lisboa',
+							tema: 'geo'
+						})
+
+			Quiz.create({	pregunta: '¿Cuál es la fórmula química del agua?',
+							respuesta: 'H2O',
+							tema: 'quim'
+						})
+
+			Quiz.create({	pregunta: '¿A qué orden de insectos pertenecen los gusanos de seda?',
+							respuesta: 'Lepidópteros',
+							tema: 'bio'
+						})
+
+			Quiz.create({	pregunta: '¿Cuál es el planeta más cercano al Sol?',
+							respuesta: 'Mercurio',
+							tema: 'ast'
 						})
 
 			.then(function(){console.log('Base de datos inicializada')});
 		};
 	});
 });
+
+	 	
+	
+	 	
+	
+	 	
+	
+	 	
+	
+	 

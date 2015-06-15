@@ -10,5 +10,15 @@
 		id="resp"
 		name="quiz[respuesta]"
 		value="<%= quiz.respuesta %>" /> <p>
-<a href="/quizes"><button type="button">Cancelar</button></a>
+<label 	for="tema"
+		class="rem">Temática:</label>
+<select id="tema" name="quiz[tema]">
+	<option value=""></option>
+	<option value="ast">Astronomía</option>
+	<option value="bio">Biología</option>
+	<option value="geo">Geografía</option>
+	<option value="quim">Química</option>
+	<option value="otros">Otros</option>
+</select> <p>
+<a href="/quizes"><button class="cancelbutton" type="button">Cancelar</button></a>
 <input type="submit" value="Guardar">
