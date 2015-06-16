@@ -158,3 +158,9 @@ nav span {
 h2, h3 {
 	padding-bottom: 10px;
 }
+.publish {
+	position: relative;
+	left: 50px;
+	top: 25px;
+	
+}

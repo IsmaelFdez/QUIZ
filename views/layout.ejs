@@ -20,6 +20,15 @@
       
       <header class="main" id="h1">
         <h1>SCI-Quiz</h1>
+        <% if (!session.user) { %>
+          <span class="session">
+            <a href="/login">Login</a>
+          </span>
+        <% } else { %>
+          <span class="session">
+            <%= session.user.username %><a href="/logout">Logout</a>
+          </span>
+        <% } %>
       </header>
       
       <nav class="main" id="n1" role="navigation">

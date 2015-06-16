@@ -12,7 +12,8 @@ module.exports = function(sequelize, DataTypes) {
 			},
 			tema: {
 				type: DataTypes.STRING,
-				validate: { notEmpty: {msg: "--> Falta Temática"}}
+				validate: { notEmpty: {msg: "--> Falta Temática"},
+							isIn: [["", "ast", "bio", "geo", "quim", "otros"]]}
 			}
 		}
 	);

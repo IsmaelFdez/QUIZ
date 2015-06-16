@@ -14,23 +14,27 @@
 					<%= quizes[i].pregunta %>
 				</a>
 			</td>
-			<td class="editButton">
-				<a href="quizes/<%= quizes[i].id %>/edit">
-					<button>Editar</button>
-				</a>
-			</td>
-			<td class="delButton">
-				<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
-					<button type="submit" onClick='return confirm("Está seguro que desea borrar:\r\n\n<%= quizes[i].pregunta %>")'>Borrar</button>
-				</form>
+			<% if (session.user) { %>
+				<td class="editButton">
+					<a href="quizes/<%= quizes[i].id %>/edit">
+						<button>Editar</button>
+					</a>
+				</td>
+				<td class="delButton">
+					<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
+						<button type="submit" onClick='return confirm("Está seguro que desea borrar:\r\n\n<%= quizes[i].pregunta %>")'>Borrar</button>
+					</form>
+				</td>
+			<% } %>
+		</tr>
+	<% } %>
+	<% if (session.user) { %>
+		<tr>
+			<td>
+				<a href="/quizes/new"><button id="newButton" type="button">Crear pregunta</button></a>
 			</td>
 		</tr>
 	<% } %>
-	<tr>
-		<td>
-			<a href="/quizes/new"><button id="newButton" type="button">Crear pregunta</button></a>
-		</td>
-	</tr>
 </table>
 
 <section id="leyenda">
@@ -45,7 +49,7 @@
 		</li>
 		<li>
 			<div class="idgeo"></div>
-			<span>Geología</span>
+			<span>Geografía</span>
 		</li>
 		<li>
 			<div class="idquim"></div>

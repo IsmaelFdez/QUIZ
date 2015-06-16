@@ -8,7 +8,13 @@
 <section id="comentarios">
 	<h3>Comentarios:</h3>
 	<% for (index in quiz.Comments) { %>
-		<p>- <%= quiz.Comments[index].texto %></p>
+		<% if (quiz.Comments[index].publicado || session.user) { %>
+			<p>- <%= quiz.Comments[index].texto %></p>
+				<% if (session.user && !quiz.Comments[index].publicado) { %>
+					<a class="publish" href="/quizes/<%= quiz.id %>/comments/<%= quiz.Comments[index].id %>/publish">
+						<button>Publicar</button></a>
+				<% } %>
+		<% } %>				
 	<% } %>
 	<a href="/quizes/<%= quiz.id %>/comments/new">
 		<button>Nuevo comentario</button>
