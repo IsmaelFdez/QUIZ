@@ -23,7 +23,7 @@ exports.index = function(req, res) {
 									'%']},
 							{order: 'tema ASC'}
 							).then(
-			function(quizes) {	
+			function(quizes) {
 				res.render('quizes/index.ejs', {quizes: quizes, errors: []});
 			}
 		).catch(function(error) { next(error);});

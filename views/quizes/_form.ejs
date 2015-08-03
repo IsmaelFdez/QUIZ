@@ -1,24 +1,35 @@
-<label 	for="preg"
-		class="rem">Pregunta:</label>
-<input 	type="text"
-		id="preg"
-		name="quiz[pregunta]"
-		value="<%= quiz.pregunta %>" /> <p>
-<label 	for="resp"
-		class="rem">Respuesta:</label>
-<input 	type="text"
-		id="resp"
-		name="quiz[respuesta]"
-		value="<%= quiz.respuesta %>" /> <p>
-<label 	for="tema"
-		class="rem">Temática:</label>
-<select id="tema" name="quiz[tema]">
-	<option value=""></option>
-	<option value="ast">Astronomía</option>
-	<option value="bio">Biología</option>
-	<option value="geo">Geografía</option>
-	<option value="quim">Química</option>
-	<option value="otros">Otros</option>
-</select> <p>
-<a href="/quizes"><button class="cancelbutton" type="button">Cancelar</button></a>
-<input type="submit" value="Guardar">
+<table id="form">
+	<tr>
+		<td>
+			<label for="preg" class="rem">Pregunta:</label>
+		</td>
+		<td>
+			<input 	type="text" id="preg" name="quiz[pregunta]" value="<%= quiz.pregunta %>" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label 	for="resp" class="rem">Respuesta:</label>
+		</td>
+		<td>
+			<input 	type="text"	id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label 	for="tema" class="rem">Temática:</label>
+		</td>
+		<td>
+			<select id="tema" name="quiz[tema]">
+				<option value=""></option>
+				<option value="ast">Astronomía</option>
+				<option value="bio">Biología</option>
+				<option value="geo">Geografía</option>
+				<option value="quim">Química</option>
+				<option value="otros">Otros</option>
+			</select>
+		</td>
+	</tr>
+</table>
+<input type="submit" class="save" value="Guardar">
+<a href="/quizes"><button class="cancel" type="button">Cancelar</button></a>

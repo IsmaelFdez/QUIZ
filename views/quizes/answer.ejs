@@ -1,2 +1,9 @@
-<p><%= respuesta %></p>
-<a href="/quizes/<%= quiz.id %>"> Volver </a>
+<section id="answer">
+	<% var icono = "check"; %>
+	<% if (respuesta === "Incorrecto") { %>
+		<% icono = "close"; %>
+	<% } %>
+	<p><i class="material-icons"><%= icono %></i>¡<%= respuesta %>!</p>
+	<a href="/quizes/<%= quiz.id %>"><button class="volver">Volver</button></a>
+	<a class="volverind" href="/quizes">Volver al índice</a>
+</section>

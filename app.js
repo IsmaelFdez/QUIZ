@@ -72,5 +72,11 @@ app.use(function(err, req, res, next) {
     });
 });
 
+// Auto-logout
+/*app.use(function(req, res, next) {
+    if (1)
+    difdate = getTime(new Date()) - getTime(req.session.Date)
+    if (difdate > 120000)
+})*/
 
 module.exports = app;

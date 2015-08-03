@@ -13,12 +13,17 @@
     <link   rel='stylesheet' type='text/css'
             media='only screen and (max-width: 480px)'
             href='/stylesheets/smartphone.css' />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="/scripts/animations.js"></script>
   </head>
 
   <body>
-    <div id="page-wrap">
-      
       <header class="main" id="h1">
+        <i class="material-icons" id="imenu" onclick="menu()">menu</i>
         <h1>SCI-Quiz</h1>
         <% if (!session.user) { %>
           <span class="session">
@@ -26,41 +31,52 @@
           </span>
         <% } else { %>
           <span class="session">
-            <%= session.user.username %><a href="/logout">Logout</a>
+            <span id="sessionuser"><%= session.user.username %></span><a href="/logout">Logout</a>
           </span>
         <% } %>
       </header>
       
       <nav class="main" id="n1" role="navigation">
+        <img src="/images/blue.png" />
         <ul>
-          <li>
-            <a href="/">Inicio</a>
-          </li>
-          <li>
-            <a href="/quizes">Preguntas</a>
-          </li>
-          <li>
-            <a href="/author">Acerca de</a>
-          </li>
+            <a href="/"><li><i class="material-icons imenu">home</i>Inicio</li></a>
+            <a href="/quizes"><li><i class="material-icons imenu">list</i>Preguntas</li></a>
+            <a href="/quizes"><li><i class="material-icons imenu">equalizer</i>Estadísticas</li></a>
+            <a href="/author"><li><i class="material-icons imenu">info_outline</i>Acerca de</li></a>
+            <!--<a href="http://es.wikipedia.org/wiki/Quiz">
+              <li>
+                <i class="material-icons imenu">help_outline</i>¿Qué es un <em>Quiz</em>?
+              </li>
+            </a>
+            <a href="https://github.com/IsmaelFdez/QUIZ">
+              <li><i class="fa fa-github imenu"></i>Ver en Github</li>
+            </a>
+            <li onmouseover="languageOn()" onmouseout="languageOff()"><i class="material-icons imenu">language</i>Idioma<i class="material-icons nextmenu">keyboard_arrow_right</i>
+              <ul id="idiomam">
+                <li><span class="ilangmenu">ES</span>Español</li>
+                <li><span class="ilangmenu">CA</span>Català</li>
+                <li><span class="ilangmenu">EN</span>English</li>
+              </ul>
+            </li>-->
         </ul>
       </nav>
 
       <section class="main" id="s1">
         <% if (errors.length) { %>
           <span id="ErrorMsgs">
-            corregir errores:<br>
+            <p>Algo ha ido mal. Revisa los mensajes de error y prueba de nuevo.</p>
             <% for (var e in errors) { %>
-              <span> <%= errors[e].message %> </span><br>
+              <span id="err<%= e %>"> <%= errors[e].message %> </span>
             <% } %>
           </span>
         <% } %>
         <%- body %>
       </section>
 
-      <footer class="main" id="f1">
-        <a href="http://es.wikipedia.org/wiki/Quiz">¿Qué es un <em>Quiz</em>?</a>
-        <a href="https://github.com/IsmaelFdez/QUIZ">Ver proyecto en Github</a>
+     <footer class="main" id="f1">
+        <a id="wiki" href="http://es.wikipedia.org/wiki/Quiz"><i class="material-icons">help_outline</i>¿Qué es un <em>Quiz</em>?</a>
+        <a id="github" href="https://github.com/IsmaelFdez/QUIZ"><i class="fa fa-github"></i>Ver proyecto en Github</a>
       </footer>
-    </div>
+
   </body>
 </html>

@@ -1,66 +1,98 @@
 <section class="searchBox">
 	<form id="searchBox" method='get' action="/quizes?search">
 	  <input type="text" name="search" placeholder="Buscador" required/>
-	  <input type="submit" value="Enviar"/>
+	  <button title="Buscar" type="submit" id="searchbutton">
+	  	<i class="material-icons imenu">search</i>
+	  </button>
+	  <a href="/quizes">
+	  	<button title="Mostrar todas">
+	  		<i class="material-icons imenu">list</i>
+	  	</button>
+	  </a>
 	</form>
+	
 </section>
-<h2>Listado de preguntas</h2>
-<table id="questionsTable">	
-	<% var i; for (i = 0; i < quizes.length; i++) {%>
-		<tr>
-			<td><div class="id<%= quizes[i].tema %>"></div></td>
-			<td class="question">
-				<a href="quizes/<%= quizes[i].id %>">
-					<%= quizes[i].pregunta %>
-				</a>
-			</td>
-			<% if (session.user) { %>
-				<td class="editButton">
-					<a href="quizes/<%= quizes[i].id %>/edit">
-						<button>Editar</button>
-					</a>
-				</td>
-				<td class="delButton">
-					<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
-						<button type="submit" onClick='return confirm("Está seguro que desea borrar:\r\n\n<%= quizes[i].pregunta %>")'>Borrar</button>
-					</form>
-				</td>
-			<% } %>
-		</tr>
-	<% } %>
-	<% if (session.user) { %>
-		<tr>
-			<td>
-				<a href="/quizes/new"><button id="newButton" type="button">Crear pregunta</button></a>
-			</td>
-		</tr>
-	<% } %>
-</table>
-
-<section id="leyenda">
+<section id="indextema">
 	<ul>
-		<li>
-			<div class="idast"></div>
-			<span>Astronomía</span>
-		</li>
-		<li>
-			<div class="idbio"></div>
-			<span>Biología</span>
-		</li>
-		<li>
-			<div class="idgeo"></div>
-			<span>Geografía</span>
-		</li>
-		<li>
-			<div class="idquim"></div>
-			<span>Química</span>
-		</li>
-		<li>
-			<div class="idotros"></div>
-			<span>Otros</span>
-		</li>
+		<a href="#id0" title="Astronomía">
+			<li id="indexast">
+				<i class="fa fa-star"></i>
+			</li>
+		</a>
+		<a href="#id1" title="Biología">
+			<li id="indexbio">
+				<i class="fa fa-paw"></i>
+			</li>
+		</a>
+		<a href="#id2" title="Geología">
+			<li id="indexgeo">
+				<i class="fa fa-globe"></i>
+			</li>
+		</a>
+		<a href="#id3" title="Química">
+			<li id="indexquim">
+				<i class="fa fa-flask"></i>
+			</li>
+		</a>
+		<a href="#id4" title="Otros">
+			<li id="indexotros">
+				<i class="fa fa-book"></i>
+			</li>
+		</a>
 	</ul>
 </section>
+<h2 id="id0">Listado de preguntas</h2>
+
+	<div class="test"></div>
+	<% var themes = ["ast", "bio", "geo", "quim", "otros"]; %>
+	<% var t; for (t = 0, tlen = themes.length; t < tlen; t++) { %>	
+		<% var icClass, nameText; %>
+			<% if (t === 0) {icClass="star icThemeHeader";nameText="Astronomía"} %>
+			<% if (t === 1) {icClass="paw icThemeHeader";nameText="Biología"} %>
+			<% if (t === 2) {icClass="globe icThemeHeader";nameText="Geología"} %>
+			<% if (t === 3) {icClass="flask icThemeHeader";nameText="Química"} %>
+			<% if (t === 4) {icClass="book icThemeHeader";nameText="Otros"} %>
+	<table class="headTheme">	
+		<tr id="id<%= t+1 %>">
+			<td><i class="fa fa-<%= icClass %>" ></i></td>
+			<td class="headerTheme"><%= nameText %></td>
+		</tr>
+	</table>
+<table class="questionsTable">		
+		<% var i; for (i = 0, ilen = quizes.length; i < ilen; i++) { %>
+			<% if (quizes[i].tema === themes[t]) { %>
+				<tr>
+					<!--<td><div class="id<%= quizes[i].tema %>"></div></td>-->
+					<td class="question">
+						<a href="quizes/<%= quizes[i].id %>">
+							<%= quizes[i].pregunta %>
+						</a>
+					</td>
+					<% if (session.user) { %>
+						<td class="editButton">
+							<a href="quizes/<%= quizes[i].id %>/edit">
+								<button title="Editar pregunta" class="edit">
+									<i class="material-icons imenu">edit</i>
+								</button>
+							</a>
+						</td>
+						<td class="delButton">
+							<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
+								<button type="submit" class="delete" title="Eliminar pregunta" onClick='return confirm("Está seguro que desea borrar:\r\n\n<%= quizes[i].pregunta %>")'>
+									<i class="material-icons imenu">delete</i>
+								</button>
+							</form>
+						</td>
+					<% } %>
+				</tr>
+			<% } %>	
+		<% } %>
+	<% } %>
+</table>	
+	<% if (session.user) { %>
+		<a href="/quizes/new"><button id="new" type="button">Crear pregunta</button></a>
+	<% } %>
+
 
 <!-- Resaltado del texto buscado -->
 <script type="text/javascript"> 

@@ -1,28 +1,54 @@
-<form id="quest"method='get' action="/quizes/<%= quiz.id %>/answer">
-  <h2>Pregunta de <%= quiz.tema.replace('ast','Astronomía:').replace('bio','Biología:').replace('geo','Geografía:').replace('quim','Química:').replace('otros','otros temas:') %></h2>
+<form id="quest" method='get' action="/quizes/<%= quiz.id %>/answer">
+  <h3>Pregunta de <%= quiz.tema.replace('ast','Astronomía:')
+								.replace('bio','Biología:')
+								.replace('geo','Geografía:')
+								.replace('quim','Química:')
+								.replace('otros','otros temas:') %></h3>
   <p><%= quiz.pregunta %></p>
-  <input type="text" name="respuesta"/>
-  <input type="submit" value="Enviar"/>
+  <input type="text" name="respuesta" placeholder="Respuesta"/>
+  <button title="Enviar respuesta" type="submit" id="sendans"><i class="material-icons">send</i></button>
 </form>
+<a class="volverind" id="volver2" href="/quizes">Volver al índice</a>
 
 <section id="comentarios">
 	<h3>Comentarios:</h3>
-	<% for (index in quiz.Comments) { %>
-		<% if (quiz.Comments[index].publicado || session.user) { %>
-			<p>- <%= quiz.Comments[index].texto %></p>
-				<% if (session.user && !quiz.Comments[index].publicado) { %>
-					<a class="publish" href="/quizes/<%= quiz.id %>/comments/<%= quiz.Comments[index].id %>/publish">
-						<button>Publicar</button></a>
-				<% } %>
-		<% } %>				
-	<% } %>
 	<a href="/quizes/<%= quiz.id %>/comments/new">
-		<button>Nuevo comentario</button>
+		<button title="Nuevo comentario" id="newComment">
+			<i class="material-icons">insert_comment</i>
+		</button>
 	</a>
+	<ul>
+		<% for (index in quiz.Comments) { %>
+			<li>
+				<% if (quiz.Comments[index].publicado || session.user) { %>
+					<span class="dateComment"><%= quiz.Comments[index].createdAt %></span>
+					<% if (session.user) { %>
+						<form method="post" action="/quizes/<%= quiz.id %>/comments/<%= quiz.Comments[index].id %>?_method=delete">
+							<button type="submit" class="delcomment" title="Eliminar comentario" onClick='return confirm("Está seguro que desea borrar el comentario:\r\n\n<%= quiz.Comments[index].texto %>")'>
+								<i class="material-icons imenu">delete</i>
+							</button>
+						</form>
+						<% if (!quiz.Comments[index].publicado) { %>
+							<a href="/quizes/<%= quiz.id %>/comments/<%= quiz.Comments[index].id %>/publish">
+								<button title="Publicar comentario" class="publish">
+									<i class="material-icons">publish</i>
+								</button>
+							</a>
+						<% } %>
+						
+					<% } %>
+					
+						<ul>
+							<li class="textComment">- <%= quiz.Comments[index].texto %></li>
+						</ul>
+				<% } %>				
+			</li>
+		<% } %>		
+	</ul>
 </section>
 
 
-<section id="gramad">
+<footer id="gramad">
 	<p>A la hora de evaluar las respuestas no se tiene en cuenta la ausencia de mayúsculas ni de tildes.<br>
 	Aun así, recuerda que no es lo mismo <em>Adán</em> que <em>adán</em> o <em>gárrulo</em> que <em>garrulo</em>. Por eso, desde SCI-Quiz, os animamos a que escribáis las respuestas de manera correcta.</p>
 	<ul>
@@ -33,4 +59,4 @@
 			<a href="http://www.rae.es/">Real Academia Española (RAE)</a>
 		</li>
 	</ul>
-</section>
+</footer>
