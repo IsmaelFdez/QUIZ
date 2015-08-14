@@ -37,6 +37,20 @@ app.use(function(req, res, next) {
     next();
 });
 
+// Auto-logout
+app.use(function(req, res, next) {
+    if (req.session.user) {
+        var currentTime = new Date();
+        var difDate = currentTime.getTime() - req.session.user.lastTime;
+        if (difDate > 120000) {
+            delete req.session.user;
+        } else {
+            req.session.user.lastTime = currentTime.getTime();
+        }
+    }
+    next();
+});
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler
@@ -71,12 +85,5 @@ app.use(function(err, req, res, next) {
         errors: []
     });
 });
-
-// Auto-logout
-/*app.use(function(req, res, next) {
-    if (1)
-    difdate = getTime(new Date()) - getTime(req.session.Date)
-    if (difdate > 120000)
-})*/
 
 module.exports = app;
